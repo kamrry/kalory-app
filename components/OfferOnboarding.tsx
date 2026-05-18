@@ -73,7 +73,7 @@ export default function OfferOnboarding(): React.ReactElement {
                     <View style={{ flex: 1, alignItems: "center" }}>
                         <View
                             style={{
-                                backgroundColor: colorScheme === 'light' ? '#f48069' : '#ef5a3c',
+                                backgroundColor: colorScheme === 'light' ? '#f48069' : '#2ecc71',
                                 borderRadius: 5,
                                 padding: 5,
                             }}
@@ -118,10 +118,10 @@ export default function OfferOnboarding(): React.ReactElement {
                                 <Ionicons
                                     name="checkmark"
                                     size={24}
-                                    color={colorScheme === 'light' ? '#f48069' : '#ef5a3c'}
+                                    color={colorScheme === 'light' ? '#f48069' : '#2ecc71'}
                                 />
                             ) : (
-                                <Text style={{ color: colorScheme === 'light' ? '#f48069' : '#ef5a3c' }}>-</Text>
+                                <Text style={{ color: colorScheme === 'light' ? '#f48069' : '#2ecc71' }}>-</Text>
                             )}
                         </View>
                     </View>

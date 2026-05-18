@@ -9,7 +9,7 @@ const API_KEYS = {
     google: 'PUPLIC_REV_CAT_GOOGLE_API_KEY',
 };
 
-const entitlementId = 'Kalory Full Version Once';
+const entitlementId = '轻食记 Full Version Once';
 
 const handleProAccess = (customerInfo: CustomerInfo) => {
     const proAccess = customerInfo.entitlements.active[entitlementId] !== undefined;

@@ -146,7 +146,7 @@ export const de = {
 
     // Onboarding
     onboarding: {
-        welcome: "Willkommen bei Kalory",
+        welcome: "Willkommen bei 轻食记",
         calculateCaloriesTitle: "Berechnen wir deine täglichen Kalorien",
         setGoalsTitle: "Dein Ziel",
         yourDailyCalories: "Deine täglichen Kalorien",

@@ -34,7 +34,7 @@ export default function Goals(): React.ReactElement {
     const themeContainerStyle =
         colorScheme === 'light' ? styles.lightContainer : styles.darkContainer;
 
-    const primaryColor = colorScheme === 'light' ? '#f48069' : '#ef5a3c';
+    const primaryColor = colorScheme === 'light' ? '#f48069' : '#2ecc71';
     const bgColor = colorScheme === 'light' ? '#e5e5e5' : '#000000';
 
     const {
@@ -67,7 +67,7 @@ export default function Goals(): React.ReactElement {
     const isSelected = (goal: GenderType): boolean => gender === goal;
 
     const genderOptions: GenderOption[] = [
-        { id: 'male', label: t('common.male'), icon: '♂' },
+        { id: 'male', label: t('common.male'), icon: '�? },
         { id: 'female', label: t('common.female'), icon: '♀' },
     ];
 

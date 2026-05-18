@@ -201,7 +201,7 @@ export default function CalorieResultsScreen() {
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                            style={[styles.button, { backgroundColor: colorScheme === 'light' ? '#f48069' : '#ef5a3c' }]}
+                            style={[styles.button, { backgroundColor: colorScheme === 'light' ? '#f48069' : '#2ecc71' }]}
                             onPress={nextOnboarding}
                             accessibilityLabel={t('common.continue')}
                             accessibilityRole="button"

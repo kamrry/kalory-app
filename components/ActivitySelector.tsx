@@ -35,7 +35,7 @@ export default function ActivitySelector(): React.ReactElement {
     const themeContainerStyle =
         colorScheme === 'light' ? styles.lightContainer : styles.darkContainer;
 
-    const primaryColor = colorScheme === 'light' ? '#f48069' : '#ef5a3c';
+    const primaryColor = colorScheme === 'light' ? '#f48069' : '#2ecc71';
     const bgColor = colorScheme === 'light' ? '#e5e5e5' : '#000000';
 
     const {
@@ -73,13 +73,13 @@ export default function ActivitySelector(): React.ReactElement {
     const ActivityOptions: ActivityOption[] = [
         { id: 'low', label: t('common.low'), icon: '🚶' },
         { id: 'medium', label: t('common.medium'), icon: '🏃' },
-        { id: 'high', label: t('common.high'), icon: '🏋️' },
+        { id: 'high', label: t('common.high'), icon: '🏋�? },
     ];
 
     //   const ActivityOptions: ActivityOption[] = [
-    //     { id: 'low', label: 'Low', icon: '•' },
-    //     { id: 'medium', label: 'Medium', icon: '••' },
-    //     { id: 'high', label: 'High', icon: '•••' },
+    //     { id: 'low', label: 'Low', icon: '�? },
+    //     { id: 'medium', label: 'Medium', icon: '•�? },
+    //     { id: 'high', label: 'High', icon: '••�? },
     //   ];
 
     // const ActivityOptions: ActivityOption[] = [

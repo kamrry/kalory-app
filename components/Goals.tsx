@@ -37,7 +37,7 @@ export default function Goals(): React.ReactElement {
     const themeContainerStyle =
         colorScheme === 'light' ? styles.lightContainer : styles.darkContainer;
 
-    const primaryColor = colorScheme === 'light' ? '#f48069' : '#ef5a3c';
+    const primaryColor = colorScheme === 'light' ? '#f48069' : '#2ecc71';
     const bgColor = colorScheme === 'light' ? '#e5e5e5' : '#000000';
 
     const {
@@ -73,9 +73,9 @@ export default function Goals(): React.ReactElement {
     const isSelected = (goal: GoalType): boolean => goalType === goal;
 
     const goalOptions: GoalOption[] = [
-        { id: 'loseWeight', label: t('goals.loseWeight'), icon: 'â†“' },
-        { id: 'maintain', label: t('goals.maintain'), icon: 'â†”' },
-        { id: 'gainWeight', label: t('goals.gainWeight'), icon: 'â†‘' }
+        { id: 'loseWeight', label: t('goals.loseWeight'), icon: 'â†? },
+        { id: 'maintain', label: t('goals.maintain'), icon: 'â†? },
+        { id: 'gainWeight', label: t('goals.gainWeight'), icon: 'â†? }
     ];
 
     function firstOnboarding() {
@@ -129,7 +129,7 @@ export default function Goals(): React.ReactElement {
             </View>
             <TouchableOpacity
                 style={{
-                    backgroundColor: colorScheme === 'light' ? '#f48069' : '#ef5a3c',
+                    backgroundColor: colorScheme === 'light' ? '#f48069' : '#2ecc71',
                     padding: 10,
                     borderRadius: 10,
                     width: 300,

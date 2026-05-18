@@ -86,7 +86,7 @@ export default function Search() {
         if (isLoading) {
             return (
                 <View style={styles.emptyOrLoadingContainer}>
-                    <ActivityIndicator size="large" color={isDarkMode ? '#FFF' : '#ef5a3c'} />
+                    <ActivityIndicator size="large" color={isDarkMode ? '#FFF' : '#2ecc71'} />
                 </View>
             );
         }

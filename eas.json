@@ -1,24 +1,16 @@
 {
   "cli": {
-    "version": ">= 7.3.0",
-    "appVersionSource": "local"
+    "version": ">= 0.52.0"
   },
   "build": {
-    "development": {
-      "developmentClient": true,
-      "distribution": "internal"
-    },
     "preview": {
-      "distribution": "internal"
+      "android": {
+        "buildType": "apk"
+      }
     },
     "production": {
-      "autoIncrement": true
-    }
-  },
-  "submit": {
-    "production": {
-      "ios": {
-        "ascAppId": "6478826572"
+      "android": {
+        "buildType": "app-bundle"
       }
     }
   }

@@ -114,7 +114,7 @@ export default function OtherGoalsInputScreen() {
                 <OtherGoals />
 
                 <TouchableOpacity
-                    style={[styles.button, !canContinue && styles.buttonDisabled, { backgroundColor: colorScheme === 'light' ? '#f48069' : '#ef5a3c' }]}
+                    style={[styles.button, !canContinue && styles.buttonDisabled, { backgroundColor: colorScheme === 'light' ? '#f48069' : '#2ecc71' }]}
                     onPress={handleNext}
                     accessibilityLabel={t('common.continue')}
                     accessibilityRole="button"

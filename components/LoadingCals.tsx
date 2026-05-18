@@ -6,7 +6,7 @@ const LoadingCals = () => {
     const { t } = useTranslation();
     const colorScheme = useColorScheme();
     const textColor = colorScheme === 'light' ? '#242c40' : '#d0d0c0';
-    const spinnerColor = colorScheme === 'light' ? '#f48069' : '#ef5a3c';
+    const spinnerColor = colorScheme === 'light' ? '#f48069' : '#2ecc71';
 
     return (
         <View style={styles.container}>

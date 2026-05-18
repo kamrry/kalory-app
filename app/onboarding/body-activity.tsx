@@ -156,7 +156,7 @@ export default function BodyActivityScreen() {
     return (
         <Animated.View style={[styles.baseContainer, themeContainerStyle, animatedStyle]}>
             <Animated.View style={[animatedImage, styles.emoji, styles.emojiOne]}>
-                <Text style={styles.emojiText}>🏋️</Text>
+                <Text style={styles.emojiText}>🏋�?/Text>
             </Animated.View>
 
             <Animated.View style={[animatedImageTwo, styles.emoji, styles.emojiTwo]}>
@@ -169,7 +169,7 @@ export default function BodyActivityScreen() {
             <ActivitySelector />
 
             <TouchableOpacity
-                style={[styles.button, { backgroundColor: colorScheme === 'light' ? '#f48069' : '#ef5a3c' }]}
+                style={[styles.button, { backgroundColor: colorScheme === 'light' ? '#f48069' : '#2ecc71' }]}
                 onPress={nextOnboarding}
                 accessibilityLabel={t('common.continue')}
                 accessibilityRole="button"

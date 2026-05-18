@@ -23,7 +23,7 @@ export default function WeightGoals(): React.ReactElement {
 
     const tertiaryColor = colorScheme === 'light' ? '#84cc16' : '#a3e635'; // green
 
-    const primaryColor = colorScheme === 'light' ? '#f48069' : '#ef5a3c';
+    const primaryColor = colorScheme === 'light' ? '#f48069' : '#2ecc71';
     const inputBgStyle = colorScheme === 'light' ? styles.lightInputBg : styles.darkInputBg;
 
     const {

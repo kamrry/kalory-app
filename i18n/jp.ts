@@ -145,7 +145,7 @@ export const jp = {
     },
 
     onboarding: {
-        welcome: "Kaloryへようこそ",
+        welcome: "轻食记へようこそ",
         calculateCaloriesTitle: "毎日のカロリーを計算しましょう",
         setGoalsTitle: "目標を設定しましょう",
         yourDailyCalories: "あなたの毎日のカロリー",

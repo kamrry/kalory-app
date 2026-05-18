@@ -34,7 +34,7 @@ export default function CalorieCalc() {
     const themeContainerStyle = colorScheme === 'light' ? styles.lightContainer : styles.darkContainer;
     const inputBgStyle = colorScheme === 'light' ? styles.lightInputBg : styles.darkInputBg;
 
-    // progressbar: #ef5a3c
+    // progressbar: #2ecc71
     const primaryColor = colorScheme === 'light' ? '#3b82f6' : '#60a5fa'; // blue
     // progressbar: #2189e2
     const secondaryColor = colorScheme === 'light' ? '#f472b6' : '#f472b6'; // pink

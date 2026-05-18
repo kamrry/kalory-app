@@ -253,7 +253,7 @@ export default function Home() {
         ]}
       >
         <LinearGradient
-          colors={['#ff6b6b', '#ef5a3c']}
+          colors={['#ff6b6b', '#2ecc71']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={styles.gradient}

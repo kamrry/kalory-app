@@ -109,10 +109,10 @@ export const zh = {
         apiKeyToContinue: "API密钥以继续",
         aiProvider: "AI提供商",
         apiKey: "API密钥",
-        youllNeedApiKeyFrom: "您需要从",
-        apiKeyNoticeSecondPart: "获取API密钥才能使用他们的AI模型。您的密钥安全地存储在您的设备上。如果您还没有，请访问他们的平台生成一个。",
+        youllNeedApiKeyFrom: "您需要从阿里云百炼平台", 
+        apiKeyNoticeSecondPart: "获取 DashScope API 密钥才能使用 AI 识别功能。推荐使用通义千问 Qwen，免费额度足够日常使用，原生中文支持，识别中国食物更准确。密钥安全存储在您的设备上。",
         localModelNotice: "在您的设备上本地运行，不需要API密钥",
-        estimatedMonthlyCost: "预计每月费用：中度使用（每天约10次扫描）1欧元。",
+        estimatedMonthlyCost: "推荐使用阿里云通义千问（新用户免费额度足够日常使用）。如使用 OpenAI，预计每月费用约 1 欧元（每天约10次扫描）。",
         cameraAccessRequired: "需要相机访问权限",
         allowCameraAccess: "允许相机访问以扫描和分析您的食物以获取营养信息。",
         enableCamera: "继续",
@@ -145,7 +145,7 @@ export const zh = {
     },
 
     onboarding: {
-        welcome: "欢迎来到Kalory",
+        welcome: "欢迎来到轻食记 🥗",
         calculateCaloriesTitle: "让我们计算您的每日卡路里",
         setGoalsTitle: "设定你的目标",
         yourDailyCalories: "您的每日卡路里",

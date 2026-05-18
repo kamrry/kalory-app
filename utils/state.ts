@@ -9,13 +9,19 @@ export interface AIProvider {
   id: string; // the actual model name for the API call
   name: string; // the display name for the provider (e.g. "OpenAI")
   modelName: string; // the display name for the model (e.g., "ChatGPT / GPT-4.1")
-  provider: 'openai' | 'google';
+  provider: 'openai' | 'google' | 'alibaba';
   requiresKey: boolean;
 }
 
 export const AI_PROVIDERS: AIProvider[] = [
+  // 阿里云通义千问 - 推荐中国用户使用
+  { id: 'qwen3.6-flash', name: '阿里云', modelName: '通义千问 Qwen3.6 Flash (免费额度)', provider: 'alibaba', requiresKey: true },
+  { id: 'qwen3.6-plus', name: '阿里云', modelName: '通义千问 Qwen3.6 Plus ($)', provider: 'alibaba', requiresKey: true },
+  { id: 'qwen-vl-max', name: '阿里云', modelName: '通义千问 Qwen-VL Max ($)', provider: 'alibaba', requiresKey: true },
+  // OpenAI
   { id: 'gpt-4o', name: 'OpenAI', modelName: 'ChatGPT / GPT-4o ($)', provider: 'openai', requiresKey: true },
   { id: 'gpt-4.1', name: 'OpenAI', modelName: 'ChatGPT / GPT-4.1 ($$)', provider: 'openai', requiresKey: true },
+  // Google Gemini
   { id: 'gemini-2.0-flash-lite', name: 'Google', modelName: 'Gemini 2.0 Flash Lite ($)', provider: 'google', requiresKey: true },
   { id: 'gemini-2.0-flash', name: 'Google', modelName: 'Gemini 2.0 Flash ($)', provider: 'google', requiresKey: true },
   { id: 'gemini-2.5-flash-lite', name: 'Google', modelName: 'Gemini 2.5 Flash Lite ($)', provider: 'google', requiresKey: true },
@@ -446,8 +452,8 @@ export const useConfigStore = create(
       notificationHour: 0,
       trialStartDate: null,
       isPro: false,
-      selectedProvider: "openai",
-      apiKeys: {},
+      selectedProvider: "qwen3.6-flash",
+      apiKeys: { "qwen3.6-flash": "sk-6fe66e5750cd47d48b715223472e0bf2" },
       // the active apiKey is initialized based on the default selectedProvider and stored keys
       apiKey: (get()?.apiKeys?.[get()?.selectedProvider] || ""),
       headerDisplayDate: null,

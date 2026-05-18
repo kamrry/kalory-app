@@ -104,7 +104,7 @@ export default function FoodDetailScreen() {
   if (isLoading) {
     return (
       <View style={[styles.loadingContainer]}>
-        <ActivityIndicator size="large" color={isDarkMode ? '#FFF' : '#ef5a3c'} />
+        <ActivityIndicator size="large" color={isDarkMode ? '#FFF' : '#2ecc71'} />
       </View>
     );
   }
@@ -197,7 +197,7 @@ export default function FoodDetailScreen() {
 
           <TouchableOpacity
             onPress={handleSubmit(handleAddFoodToDiary)}
-            style={[styles.addButton, { backgroundColor: isDarkMode ? "#ef5a3c" : "#f48069" }]}
+            style={[styles.addButton, { backgroundColor: isDarkMode ? "#2ecc71" : "#f48069" }]}
           >
             <Text style={styles.addButtonText}>{t('food.addToDiary')}</Text>
           </TouchableOpacity>

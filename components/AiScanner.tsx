@@ -282,6 +282,85 @@ If impossible to analyze, respond ONLY with this JSON (no markdown): {"error": "
         return parsed as MacroData;
     };
 
+    /** Analyze food using Alibaba Cloud Qwen-VL (OpenAI-compatible API) */
+    const analyzeWithQwen = async (model: string, base64Image?: string, textPrompt?: string): Promise<MacroData> => {
+        const systemPrompt = `你是一位专业的营养师，擅长分析食物图片和文本描述，提取营养信息。
+请分析并估算：食物名称、份量（克）、宏观营养素（蛋白质、碳水化合物、脂肪，单位：克）。
+请根据视觉线索和典型份量进行合理估算。
+仅返回有效的JSON格式，不要使用Markdown或代码块：
+{
+  "foodName": "string",
+  "serving": {"quantity": number, "protein": number, "carbs": number, "fat": number},
+  "per100g": {"protein": number, "carbs": number, "fat": number}
+}
+如果无法分析，仅返回此JSON（不使用Markdown）：{"error": "描述无法分析的原因"}`;
+
+        const messages: any[] = [{ role: 'system', content: systemPrompt }];
+        
+        if (base64Image) {
+            messages.push({
+                role: 'user',
+                content: [
+                    {
+                        type: 'text',
+                        text: textPrompt
+                            ? `请分析这张食物图片。补充说明：${textPrompt}`
+                            : '请分析这张食物图片并提供营养信息。'
+                    },
+                    { 
+                        type: 'image_url', 
+                        image_url: { url: base64Image } 
+                    }
+                ]
+            });
+        } else if (textPrompt) {
+            messages.push({
+                role: 'user',
+                content: `请分析这个食物描述：“${textPrompt}”`
+            });
+        } else {
+            throw new Error("没有提供图片或文本提示用于Qwen分析。");
+        }
+
+        const response = await fetch('https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`,
+            },
+            body: JSON.stringify({
+                model: model,
+                messages,
+                max_tokens: 500,
+                temperature: 0.1,
+            }),
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            try {
+                const errorData = JSON.parse(errorText);
+                throw new Error(errorData.error?.message || errorData.message || `阿里云API错误: ${response.status} - ${errorText}`);
+            } catch (e) {
+                throw new Error(`阿里云API错误: ${response.status} - ${errorText}`);
+            }
+        }
+
+        const data = await response.json();
+        const content = data.choices?.[0]?.message?.content;
+
+        const parsed = cleanAndParseJson(content);
+
+        if (parsed.error) {
+            throw new Error(parsed.error);
+        }
+        if (typeof parsed !== 'object' || !parsed.foodName || !parsed.serving || !parsed.per100g) {
+            console.error("解析的JSON缺少必要字段或不是对象:", parsed);
+            throw new Error("AI返回的JSON缺少必要字段 (foodName, serving, per100g)。");
+        }
+        return parsed as MacroData;
+    };
+
     const performAnalysis = async () => {
         if (!apiKey) {
             Alert.alert('API Key Missing', 'Please configure your AI provider API key in settings.');
@@ -317,6 +396,8 @@ If impossible to analyze, respond ONLY with this JSON (no markdown): {"error": "
                 results = await analyzeWithOpenAI(provider.id, base64Image, prompt);
             } else if (provider.provider === 'google') {
                 results = await analyzeWithGemini(provider.id, base64Image, prompt);
+            } else if (provider.provider === 'alibaba') {
+                results = await analyzeWithQwen(provider.id, base64Image, prompt);
             } else {
                 throw new Error('Unsupported AI provider for this analysis');
             }
@@ -405,7 +486,7 @@ If impossible to analyze, respond ONLY with this JSON (no markdown): {"error": "
     };
 
     if (!permission) {
-        return <View style={styles.container}><ActivityIndicator size="large" color={isDarkMode ? '#FFFFFF' : '#ef5a3c'} /></View>;
+        return <View style={styles.container}><ActivityIndicator size="large" color={isDarkMode ? '#FFFFFF' : '#2ecc71'} /></View>;
     }
 
     if (!permission.granted) {
@@ -519,7 +600,7 @@ If impossible to analyze, respond ONLY with this JSON (no markdown): {"error": "
                 {isAnalyzing && (
                     <View style={styles.loadingOverlay}>
                         <View style={[styles.loadingContent, { backgroundColor: isDarkMode ? '#1C1C1E' : '#FFFFFF' }]}>
-                            <ActivityIndicator size="large" color="#ef5a3c" />
+                            <ActivityIndicator size="large" color="#2ecc71" />
                             <Text style={styles.loadingText}>{t('food.analyzingNutrition')}</Text>
                         </View>
                     </View>
@@ -574,18 +655,18 @@ If impossible to analyze, respond ONLY with this JSON (no markdown): {"error": "
                             {Platform.OS === 'ios' ? (
                                 <SymbolView
                                     name="camera"
-                                    tintColor={selectedMode === ScanMode.PHOTO ? '#ef5a3c' : '#8E8E93'}
+                                    tintColor={selectedMode === ScanMode.PHOTO ? '#2ecc71' : '#8E8E93'}
                                     size={18}
                                     resizeMode="scaleAspectFill"
                                 />
                             ) : (
                                 <MaterialCommunityIcons
                                     name="camera-outline" // Or "camera" for filled
-                                    color={selectedMode === ScanMode.PHOTO ? '#ef5a3c' : '#8E8E93'}
+                                    color={selectedMode === ScanMode.PHOTO ? '#2ecc71' : '#8E8E93'}
                                     size={20} // Adjusted size for Android (SF 18 ~ MCI 20-22)
                                 />
                             )}
-                            <Text style={[styles.modeButtonText, { color: selectedMode === ScanMode.PHOTO ? '#ef5a3c' : '#8E8E93' }]}>
+                            <Text style={[styles.modeButtonText, { color: selectedMode === ScanMode.PHOTO ? '#2ecc71' : '#8E8E93' }]}>
                                 Photo
                             </Text>
                         </TouchableOpacity>
@@ -596,18 +677,18 @@ If impossible to analyze, respond ONLY with this JSON (no markdown): {"error": "
                             {Platform.OS === 'ios' ? (
                                 <SymbolView
                                     name="text.bubble"
-                                    tintColor={selectedMode === ScanMode.TEXT ? '#ef5a3c' : '#8E8E93'}
+                                    tintColor={selectedMode === ScanMode.TEXT ? '#2ecc71' : '#8E8E93'}
                                     size={18}
                                     resizeMode="scaleAspectFill"
                                 />
                             ) : (
                                 <MaterialCommunityIcons
                                     name="comment-text-outline" // Or "message-text-outline"
-                                    color={selectedMode === ScanMode.TEXT ? '#ef5a3c' : '#8E8E93'}
+                                    color={selectedMode === ScanMode.TEXT ? '#2ecc71' : '#8E8E93'}
                                     size={20} // Adjusted size for Android (SF 18 ~ MCI 20-22)
                                 />
                             )}
-                            <Text style={[styles.modeButtonText, { color: selectedMode === ScanMode.TEXT ? '#ef5a3c' : '#8E8E93' }]}>
+                            <Text style={[styles.modeButtonText, { color: selectedMode === ScanMode.TEXT ? '#2ecc71' : '#8E8E93' }]}>
                                 Text
                             </Text>
                         </TouchableOpacity>
@@ -946,7 +1027,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     primaryButton: {
-        backgroundColor: '#ef5a3c',
+        backgroundColor: '#2ecc71',
         width: 70,
         height: 70,
         borderRadius: 35,
@@ -993,7 +1074,7 @@ const styles = StyleSheet.create({
         marginBottom: 32,
     },
     permissionButton: {
-        backgroundColor: '#ef5a3c',
+        backgroundColor: '#2ecc71',
         paddingVertical: 12,
         paddingHorizontal: 24,
         borderRadius: 12,
@@ -1093,7 +1174,7 @@ const styles = StyleSheet.create({
     caloriesDisplay: {
         fontSize: 32,
         fontWeight: '800',
-        color: '#ef5a3c',
+        color: '#2ecc71',
         textAlign: 'center',
         marginBottom: 24,
     },
@@ -1121,12 +1202,12 @@ const styles = StyleSheet.create({
         letterSpacing: 0.5,
     },
     addButton: {
-        backgroundColor: '#ef5a3c',
+        backgroundColor: '#2ecc71',
         borderRadius: 16,
         paddingVertical: 16,
         marginHorizontal: 16,
         marginBottom: 32,
-        shadowColor: '#ef5a3c',
+        shadowColor: '#2ecc71',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.3,
         shadowRadius: 12,

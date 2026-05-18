@@ -111,7 +111,7 @@ export default function AiScannerPage() {
                         <TouchableOpacity
                             style={[
                                 styles.setupButton,
-                                { backgroundColor: '#ef5a3c' },
+                                { backgroundColor: '#2ecc71' },
                             ]}
                             onPress={handleGoToSettings}
                         >

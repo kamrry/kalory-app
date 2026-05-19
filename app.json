@@ -13,6 +13,7 @@
       "infoPlist": {
         "NSCameraUsageDescription": "Allow 轻食记 to access camera for food scanning and AI recognition. Only food data from the scan will be used. No other data will be collected or used.",
         "NSMicrophoneUsageDescription": "Allow 轻食记 to access the microphone for potential video recording features.",
+        "NSPhotoLibraryUsageDescription": "Allow 轻食记 to access photo library for selecting food images to analyze.",
         "ITSAppUsesNonExemptEncryption": false
       },
       "bundleIdentifier": "com.qingshiji.app",
@@ -25,7 +26,9 @@
       },
       "permissions": [
         "android.permission.CAMERA",
-        "android.permission.RECORD_AUDIO"
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
       ],
       "package": "com.qingshiji.app",
       "versionCode": 22

@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { CameraView, useCameraPermissions } from 'expo-camera';
+import * as ImagePicker from 'expo-image-picker';
 import {
     StyleSheet,
     TouchableOpacity,
@@ -462,6 +463,45 @@ If impossible to analyze, respond ONLY with this JSON (no markdown): {"error": "
         }
     };
 
+    const handlePickImage = async () => {
+        try {
+            // 请求相册权限
+            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            if (status !== 'granted') {
+                Alert.alert(
+                    t('settings.cameraAccessDenied') || '相册访问被拒绝',
+                    t('settings.enableCameraInSettings') || '请在设置中启用相册访问权限',
+                    [
+                        { text: t('common.cancel') || '取消' },
+                        { text: t('settings.openSettings') || '打开设置', onPress: () => Linking.openSettings() }
+                    ]
+                );
+                return;
+            }
+
+            // 打开相册
+            const result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: true,
+                aspect: [4, 3],
+                quality: 0.8,
+            });
+
+            if (!result.canceled && result.assets[0]) {
+                setImageUri(result.assets[0].uri);
+                console.log('Image picked from gallery:', result.assets[0].uri);
+            }
+        } catch (err) {
+            console.error('Image picker error:', err);
+            const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+            Alert.alert(
+                t('settings.captureFailed') || '选择图片失败',
+                errorMessage,
+                [{ text: t('common.ok') || '确定' }]
+            );
+        }
+    };
+
     const calculateCalories = (protein: number, carbs: number, fat: number): number => {
         return Math.round(protein * 4 + carbs * 4 + fat * 9);
     };
@@ -743,20 +783,20 @@ If impossible to analyze, respond ONLY with this JSON (no markdown): {"error": "
                                 </TouchableOpacity>
                             ) : (
                                 <TouchableOpacity
-                                    onPress={() => setFlash(!flash)}
+                                    onPress={handlePickImage}
                                     style={[styles.secondaryButton, { backgroundColor: 'rgba(255, 255, 255, 0.2)' }]}
                                     disabled={isAnalyzing}
                                 >
                                     {Platform.OS === 'ios' ? (
                                         <SymbolView
-                                            name={flash ? 'bolt.fill' : 'bolt.slash'}
+                                            name="photo.on.rectangle"
                                             tintColor="#FFFFFF"
                                             size={20}
                                             resizeMode="scaleAspectFill"
                                         />
                                     ) : (
                                         <MaterialCommunityIcons
-                                            name={flash ? 'flash' : 'flash-off'}
+                                            name="image-multiple"
                                             color="#FFFFFF"
                                             size={24}
                                         />

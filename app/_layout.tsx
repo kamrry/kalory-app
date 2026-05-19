@@ -32,18 +32,43 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (loaded) {
-      initPurchases();
-      checkProStatus();
-      SplashScreen.hideAsync();
-      createSnapshotsForPastEntries();
+      // Wrap everything in try-catch to prevent crashes
+      const init = async () => {
+        // Temporarily skip initPurchases to prevent potential crash
+        // try {
+        //   await initPurchases();
+        // } catch (e) {
+        //   console.error('initPurchases error:', e);
+        // }
+        try {
+          SplashScreen.hideAsync();
+        } catch (e) {
+          console.error('hideAsync error:', e);
+        }
+        try {
+          createSnapshotsForPastEntries();
+        } catch (e) {
+          console.error('createSnapshotsForPastEntries error:', e);
+        }
+      };
+      init();
     }
   }, [loaded]);
 
+  // Temporary: skip pro check to prevent potential crash. Can re-enable later.
+  // const checkProStatus = async () => {
+  //   try {
+  //     const proAccess = await hasProAccess();
+  //     if (!proAccess) {
+  //       router.replace('/paywall');
+  //     }
+  //   } catch (e) {
+  //     console.error('checkProStatus error:', e);
+  //   }
+  // };
   const checkProStatus = async () => {
-    const proAccess = await hasProAccess();
-    if (!proAccess) {
-      router.replace('/paywall');
-    }
+    // Skip for now - can re-enable after testing
+    console.log('Skipping pro check to prevent crash');
   };
 
   const { completedOnboarding } = useConfigStore();

@@ -421,21 +421,44 @@ If impossible to analyze, respond ONLY with this JSON (no markdown): {"error": "
             return;
         }
 
-        if (cameraRef.current) {
-            try {
+        // 检查相机是否就绪
+        if (!cameraRef.current) {
+            console.error('Camera ref is null - camera not initialized');
+            Alert.alert(
+                t('settings.cameraNotReady') || '相机未就绪',
+                t('settings.pleaseWaitOrRestart') || '请稍候再试或重启应用',
+                [{ text: t('common.ok') || '确定' }]
+            );
+            return;
+        }
 
-                const photo = await cameraRef.current.takePictureAsync({
-                    imageType: 'jpg',
-                    quality: 0.8,
-                    exif: false
-                });
+        try {
+            const photo = await cameraRef.current.takePictureAsync({
+                imageType: 'jpg',
+                quality: 0.8,
+                exif: false
+            });
 
-                if (photo) {
-                    setImageUri(photo.uri);
-                }
-            } catch (err) {
-                setError('Failed to capture photo');
+            if (photo) {
+                setImageUri(photo.uri);
+                console.log('Photo captured successfully:', photo.uri);
+            } else {
+                console.error('takePictureAsync returned null');
+                Alert.alert(
+                    t('settings.captureFailed') || '拍照失败',
+                    t('settings.pleaseTryAgain') || '请重试',
+                    [{ text: t('common.ok') || '确定' }]
+                );
             }
+        } catch (err) {
+            console.error('Camera capture error:', err);
+            const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+            setError(`拍照失败: ${errorMessage}`);
+            Alert.alert(
+                t('settings.captureFailed') || '拍照失败',
+                errorMessage,
+                [{ text: t('common.ok') || '确定' }]
+            );
         }
     };
 

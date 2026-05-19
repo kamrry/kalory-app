@@ -118,7 +118,11 @@ export const jp = {
         enableCamera: "続行",
         cameraAccessDenied: "カメラへのアクセスが拒否されました",
         enableCameraInSettings: "カメラへのアクセスを拒否しました。デバイスの設定で有効にしてください。",
-        openSettings: "設定を開く"
+        openSettings: "設定を開く",
+        cameraNotReady: "カメラが準備できていません",
+        pleaseWaitOrRestart: "しばらく待つか、アプリを再起動してください",
+        captureFailed: "撮影に失敗しました",
+        pleaseTryAgain: "もう一度お試しください"
     },
 
     // Language Settings

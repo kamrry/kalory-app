@@ -117,7 +117,11 @@ export const en = {
         enableCamera: "Continue",
         cameraAccessDenied: "Camera Access Denied",
         enableCameraInSettings: "You have denied camera access. Please enable it in your device settings.",
-        openSettings: "Open Settings"
+        openSettings: "Open Settings",
+        cameraNotReady: "Camera Not Ready",
+        pleaseWaitOrRestart: "Please wait a moment or restart the app",
+        captureFailed: "Capture Failed",
+        pleaseTryAgain: "Please try again"
     },
 
     // Language Settings

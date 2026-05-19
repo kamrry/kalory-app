@@ -118,7 +118,11 @@ export const zh = {
         enableCamera: "继续",
         cameraAccessDenied: "相机访问被拒绝",
         enableCameraInSettings: "您已拒绝相机访问。请在您的设备设置中启用它。",
-        openSettings: "打开设置"
+        openSettings: "打开设置",
+        cameraNotReady: "相机未就绪",
+        pleaseWaitOrRestart: "请稍候再试或重启应用",
+        captureFailed: "拍照失败",
+        pleaseTryAgain: "请重试"
     },
 
     // Language Settings

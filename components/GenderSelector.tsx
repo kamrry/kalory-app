@@ -67,7 +67,7 @@ export default function Goals(): React.ReactElement {
     const isSelected = (goal: GenderType): boolean => gender === goal;
 
     const genderOptions: GenderOption[] = [
-        { id: 'male', label: t('common.male'), icon: '�? },
+        { id: 'male', label: t('common.male'), icon: '♂' },
         { id: 'female', label: t('common.female'), icon: '♀' },
     ];
 

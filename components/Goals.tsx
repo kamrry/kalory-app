@@ -73,9 +73,9 @@ export default function Goals(): React.ReactElement {
     const isSelected = (goal: GoalType): boolean => goalType === goal;
 
     const goalOptions: GoalOption[] = [
-        { id: 'loseWeight', label: t('goals.loseWeight'), icon: 'â†? },
-        { id: 'maintain', label: t('goals.maintain'), icon: 'â†? },
-        { id: 'gainWeight', label: t('goals.gainWeight'), icon: 'â†? }
+        { id: 'loseWeight', label: t('goals.loseWeight'), icon: 'â†“' },
+        { id: 'maintain', label: t('goals.maintain'), icon: 'â†”' },
+        { id: 'gainWeight', label: t('goals.gainWeight'), icon: 'â†‘' }
     ];
 
     function firstOnboarding() {

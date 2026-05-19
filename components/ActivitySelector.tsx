@@ -73,13 +73,13 @@ export default function ActivitySelector(): React.ReactElement {
     const ActivityOptions: ActivityOption[] = [
         { id: 'low', label: t('common.low'), icon: '🚶' },
         { id: 'medium', label: t('common.medium'), icon: '🏃' },
-        { id: 'high', label: t('common.high'), icon: '🏋�? },
+        { id: 'high', label: t('common.high'), icon: '🏋️' },
     ];
 
     //   const ActivityOptions: ActivityOption[] = [
-    //     { id: 'low', label: 'Low', icon: '�? },
-    //     { id: 'medium', label: 'Medium', icon: '•�? },
-    //     { id: 'high', label: 'High', icon: '••�? },
+    //     { id: 'low', label: 'Low', icon: '🚶' },
+    //     { id: 'medium', label: 'Medium', icon: '🏃' },
+    //     { id: 'high', label: 'High', icon: '🏋️' },
     //   ];
 
     // const ActivityOptions: ActivityOption[] = [

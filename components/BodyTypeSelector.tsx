@@ -82,9 +82,9 @@ export default function BodyTypeSelector(): React.ReactElement {
     ];
 
     //   const BodyOption: BodyOption[] = [
-    //     { id: 'low', label: 'Low', icon: '�? },
-    //     { id: 'medium', label: 'Medium', icon: '•�? },
-    //     { id: 'high', label: 'High', icon: '••�? },
+    //     { id: 'low', label: 'Low', icon: '🚶' },
+    //     { id: 'medium', label: 'Medium', icon: '🏃' },
+    //     { id: 'high', label: 'High', icon: '🏋️' },
     //   ];
 
     // const BodyOption: BodyOption[] = [

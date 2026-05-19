@@ -104,7 +104,7 @@ export const zh = {
         pleaseAddYour: "请添加您的",
         apiKeyToUseFeatures: "API密钥以使用AI功能。",
         addApiKey: "添加API密钥",
-        aiServiceInfoMessage: "AI功能需��正确配置才能正常工作。",
+        aiServiceInfoMessage: "AI功能需要正确配置才能正常工作。",
         pleaseEnterYour: "请输入您的",
         apiKeyToContinue: "API密钥以继续",
         aiProvider: "AI提供商",

@@ -121,7 +121,7 @@ export type Barcode = {
   setBarcodeCode: (barcode: string) => void
 }
 
-export type Language = "en" | "de" | "fr" | "it" | "jp" | "zh" | null;
+export type Language = "en" | "zh" | "jp";  // 保留英语、中文、日语
 export type Config = {
   version: number
   darkMode?: boolean
@@ -428,7 +428,7 @@ export const useBarcodeCodeStore = create(
   ),
 )
 
-const supportedLanguages: Language[] = ["en", "de", "fr", "it", "jp", "zh"];
+const supportedLanguages: Language[] = ["en", "zh", "jp"];
 
 const getInitialLanguage = (): Language => {
   const deviceLanguage = getLocales()[0]?.languageCode;

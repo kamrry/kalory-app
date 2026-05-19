@@ -1,19 +1,13 @@
-// i18n/index.ts
-import { useConfigStore } from '../utils/state';
+// i18n/index.ts - 简化版：保留中文、英语、日语
 import { en } from './en';
-import { de } from './de';
-import { fr } from './fr';
-import { it } from './it';
-import { jp } from './jp';
 import { zh } from './zh';
+import { jp } from './jp';
+import { useConfigStore } from '../utils/state';
 
 const translations = {
     en,
-    de,
-    fr,
-    it,
-    jp,
     zh,
+    jp,
 } as const;
 
 type TranslationKeys<T> = T extends object
@@ -21,7 +15,7 @@ type TranslationKeys<T> = T extends object
     : never;
 
 export type TranslationKey = TranslationKeys<typeof en>;
-export type Language = keyof typeof translations;
+export type Language = 'en' | 'zh' | 'jp';
 
 function getTranslation(key: TranslationKey, language: Language): string {
     const keys = key.split('.');
@@ -55,4 +49,4 @@ export function t(key: TranslationKey): string {
     return getTranslation(key, language);
 }
 
-export { en, de, fr, it, jp, zh };
+export { en, zh, jp };

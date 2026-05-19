@@ -1,10 +1,11 @@
 // app/paywall.tsx
 import React, { useEffect, useState, useCallback } from 'react';
-import { StyleSheet, SafeAreaView, ActivityIndicator, TouchableOpacity, Image, Linking } from 'react-native';
-import { makePurchase, restorePurchase, hasProAccess } from '@/utils/purchases';
-import Purchases, { PurchasesPackage } from 'react-native-purchases';
+import { StyleSheet, SafeAreaView, ActivityIndicator, TouchableOpacity, Image, Linking, Alert } from 'react-native';
+// Temporarily disable RevenueCat - API keys are placeholders
+// import { makePurchase, restorePurchase, hasProAccess } from '@/utils/purchases';
+// import Purchases, { PurchasesPackage } from 'react-native-purchases';
 import { useConfigStore } from '@/utils/state';
-import { router, useLocalSearchParams, useFocusEffect } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { Text, useThemeColor, View } from '@/components/Themed';
 import { useTranslation, t as translate } from '@/i18n';
 
@@ -29,8 +30,9 @@ const LegalLinks = () => (
 export default function PaywallScreen() {
     const { t } = useTranslation();
     const { trialStartDate, setTrialStartDate, isPro } = useConfigStore();
-    const [offering, setOffering] = useState<PurchasesPackage | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
+    // Disable RevenueCat - using placeholder state
+    const [offering, setOffering] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
     const [isPurchasing, setIsPurchasing] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -47,30 +49,16 @@ export default function PaywallScreen() {
         }
     }, [isPro]);
 
-    const getOfferings = useCallback(async () => {
-        setIsLoading(true);
-        setError(null);
-        try {
-            const offerings = await Purchases.getOfferings();
-            if (offerings.current && offerings.current.availablePackages.length > 0) {
-                setOffering(offerings.current.availablePackages[0]);
-            } else {
-                setError(translate('paywall.errorNoProducts'));
-            }
-        } catch (e) {
-            console.error('Error getting offerings:', e);
-            setError(translate('paywall.errorFetchOfferings'));
-        } finally {
-            setIsLoading(false);
-        }
-    }, []);
+    // Disable RevenueCat offerings fetch
+    // const getOfferings = useCallback(async () => {...}, []);
 
-    useFocusEffect(
-        useCallback(() => {
-            hasProAccess(); // update the isPro state in zustand
-            getOfferings();
-        }, [getOfferings])
-    );
+    // Disable useFocusEffect with hasProAccess
+    // useFocusEffect(
+    //     useCallback(() => {
+    //         hasProAccess();
+    //         getOfferings();
+    //     }, [getOfferings])
+    // );
 
 
     const handleStartTrial = () => {
@@ -79,26 +67,28 @@ export default function PaywallScreen() {
     };
 
     const handleMakePurchase = async () => {
-        if (!offering) return;
-        setIsPurchasing(true);
-        try {
-            await makePurchase(offering);
-        } catch (e) {
-            // error is handled inside makePurchase
-        } finally {
-            setIsPurchasing(false);
-        }
+        // Disabled - RevenueCat not configured
+        // if (!offering) return;
+        // setIsPurchasing(true);
+        // try {
+        //     await makePurchase(offering);
+        // } catch (e) {
+        // } finally {
+        //     setIsPurchasing(false);
+        // }
+        Alert.alert('功能未开启', '付费功能暂未开放');
     };
 
     const handleRestorePurchase = async () => {
-        setIsPurchasing(true);
-        try {
-            await restorePurchase();
-        } catch (e) {
-            // Error is handled inside restorePurchase
-        } finally {
-            setIsPurchasing(false);
-        }
+        // Disabled - RevenueCat not configured
+        // setIsPurchasing(true);
+        // try {
+        //     await restorePurchase();
+        // } catch (e) {
+        // } finally {
+        //     setIsPurchasing(false);
+        // }
+        Alert.alert('功能未开启', '付费功能暂未开放');
     };
 
     useEffect(() => {

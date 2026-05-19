@@ -1,5 +1,5 @@
 import React from 'react';
-import { router, useFocusEffect } from 'expo-router';
+import { router } from 'expo-router';
 import { useColorScheme, StyleSheet, TouchableOpacity, Linking, Platform, SafeAreaView } from 'react-native';
 import { AI_PROVIDERS, useConfigStore } from '../../utils/state';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
@@ -7,14 +7,9 @@ import { SymbolView } from 'expo-symbols';
 import { View, Text } from '@/components/Themed';
 import { useHeaderHeight } from '@react-navigation/elements';
 import { useTranslation } from '@/i18n';
-import { hasProAccess } from '@/utils/purchases';
-import { useCallback } from 'react';
 
 const languages = {
   en: "English",
-  de: "Deutsch",
-  fr: "Français",
-  it: "Italiano",
   jp: "日本語",
   zh: "中文"
 };
@@ -27,12 +22,6 @@ export default function Settings() {
   const { language, selectedProvider, setCompletedOnboarding, trialStartDate, isPro } = useConfigStore();
   const selectedProviderData = AI_PROVIDERS.find(p => p.id === selectedProvider);
   const { t } = useTranslation();
-
-  useFocusEffect(
-    useCallback(() => {
-      hasProAccess();
-    }, [])
-  );
 
   const openPrivacyPolicy = () => {
     Linking.openURL('https://kalory.app/pp');
